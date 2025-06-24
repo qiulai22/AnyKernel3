@@ -47,13 +47,9 @@ $ksu_supported || abort "  -> Non-GKI device, abort."
 # 确定 root 方式
 if [ -d /data/adb/magisk ] || [ -f /sbin/.magisk ]; then
     ui_print "检测到 Magisk，当前 Root 方式为 Magisk。在此情况下刷写 KSU 内核有很大可能会导致你的设备变砖，是否要继续？"
-    ui_print "Magisk detected, current root method is Magisk. Flashing the KSU kernel in this case may brick your device, do you want to continue?"
     ui_print "请选择操作："
-    ui_print "Please select an action:"
     ui_print "音量上键：退出脚本"
-    ui_print "Volume up key: No"
     ui_print "音量下键：继续安装"
-    ui_print "Volume down button: Yes"
     key_click=""
     while [ "$key_click" = "" ]; do
         key_click=$(getevent -qlc 1 | awk '{ print $3 }' | grep 'KEY_VOLUME')
@@ -100,9 +96,6 @@ fi
 KSUD_PATH="/data/adb/ksud"
 ui_print "安装 SUSFS 模块?"
 ui_print "音量上跳过安装；音量下安装模块"
-ui_print "Install susfs4ksu Module?"
-ui_print "Volume UP: NO；Volume DOWN: YES"
-
 key_click=""
 while [ "$key_click" = "" ]; do
     key_click=$(getevent -qlc 1 | awk '{ print $3 }' | grep 'KEY_VOLUME')
