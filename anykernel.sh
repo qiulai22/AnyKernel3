@@ -82,25 +82,8 @@ else
 fi
 
 # 优先选择模块路径
-if [ -f "$AKHOME/ksu_module_susfs_1.5.2+.zip" ]; then
-    MODULE_PATH="$AKHOME/ksu_module_susfs_1.5.2+_Release.zip"
-    ui_print "  -> Installing SUSFS module from Release"
-elif [ -f "$AKHOME/ksu_module_susfs_1.5.2+_CI.zip" ]; then
-    MODULE_PATH="$AKHOME/ksu_module_susfs_1.5.2+_CI.zip"
-    ui_print "  -> Installing SUSFS module from CI"
-else
-    ui_print "  -> No module found!"
-    exit 1
-fi
 
 KSUD_PATH="/data/adb/ksud"
-ui_print "安装 SUSFS 模块?"
-ui_print "音量上跳过安装；音量下安装模块"
-key_click=""
-while [ "$key_click" = "" ]; do
-    key_click=$(getevent -qlc 1 | awk '{ print $3 }' | grep 'KEY_VOLUME')
-    sleep 0.2
-done
 case "$key_click" in
     "KEY_VOLUMEDOWN")
         if [ -f "$KSUD_PATH" ]; then
